@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div_longin {
+            float: right;
+        }
+
+        .menu {
+            float: left;
+            padding-right: 28.25%;
+        }
+
+    </style>
+</head>
+<body>
+<!--Head-->
+<div id="head" style="background: antiquewhite">
+    <div id="div_longin">
+        <button id="longin" onclick="checklongin()">Đăng nhập</button>
+    </div>
+    <div>
+        <img src="image/logo.png" alt="" width="558" height="132">
+    </div>
+
+</div>
+<!--Menu-->
+<div id="menuHead">
+    <div>
+        <select class="menu" id="menu_car" onchange="showCar()">
+            <option>Ô tô</option>
+            <option class="Product" value="toyota">Toyota</option>
+            <option class="Product" value="hyundai">Hyundai</option>
+            <option class="Product" value="kia">Kia</option>
+        </select>
+    </div>
+    <div>
+        <select class="menu" id="menu_motor" onchange="showMotor()">
+            <option class="Product" value="Motor">Xe máy</option>
+            <option class="Product" value="honda">Honda</option>
+            <option class="Product" value="suzuki">Suzuki</option>
+            <option class="Product" value="piagio">Piagio</option>
+        </select>
+    </div>
+    <div>
+        <select class="menu" id="menu_mobile" onchange="showMobile()">Điện thoại
+            <option>Iphone</option>
+            <option>SamSung</option>
+            <option>Xiaomi</option>
+        </select>
+    </div>
+</div>
+<div id="content">
+    <img src="image/background.jpg" width="100%" height="80%">
+</div>
+
+<div id="footer" style="background: #2570a9">
+    <img src="image/logo.png" width="186" height="66">
+</div>
+<script>
+    class Product {
+        name;
+        price;
+        image;
+        category;
+
+        constructor(name, price, image, category) {
+            this.name = name;
+            this.price = price;
+            this.image = image;
+            this.category = category;
+        }
+    }
+
+    let carToy1 = new Product("vios1", 100, "image/car_home.jpg", "toyota")
+    let carToy2 = new Product("vios2", 200, "image/car_home.jpg", "toyota")
+    let carToy3 = new Product("vios3", 300, "image/car_home.jpg", "toyota")
+    let carToy4 = new Product("vios4", 400, "image/car_home.jpg", "toyota")
+    let arrayCarToy = [[carToy1, carToy2, carToy3], [carToy4]];
+
+    let carHyun1 = new Product("accent1", 120, "image/car_hyundai1.jpg", "hyundai")
+    let carHyun2 = new Product("accent2", 220, "image/car_hyundai1.jpg", "hyundai")
+    let carHyun3 = new Product("accent3", 320, "image/car_hyundai1.jpg", "hyundai")
+    let carHyun4 = new Product("accent4", 420, "image/car_hyundai1.jpg", "hyundai")
+    let carHyun5 = new Product("accent5", 520, "image/car_hyundai1.jpg", "hyundai")
+    let arrayCarHyun = [[carHyun1, carHyun2, carHyun3], [carHyun4, carHyun5]];
+
+    let carKia1 = new Product("kia1", 220, "image/car_kia1.jpg", "kia")
+    let carKia2 = new Product("kia2", 220, "image/car_kia1.jpg", "kia")
+    let carKia3 = new Product("kia3", 220, "image/car_kia1.jpg", "kia")
+    let carKia4 = new Product("kia4", 220, "image/car_kia1.jpg", "kia")
+    let carKia5 = new Product("kia5", 220, "image/car_kia1.jpg", "kia")
+    let carKia6 = new Product("kia6", 220, "image/car_kia1.jpg", "kia")
+    let arrayKia = [[carKia1, carKia2, carKia3], [carKia4, carKia5, carKia6]];
+
+    let motorHonda1= new Product("honda1", 50, "image/moto_home.jpg", "honda")
+    let motorHonda2= new Product("honda2", 60, "image/moto_home.jpg", "honda")
+    let motorHonda3= new Product("honda3", 70, "image/moto_home.jpg", "honda")
+    let motorHonda4= new Product("honda4", 80, "image/moto_home.jpg", "honda")
+    let motorHonda5= new Product("honda5", 90, "image/moto_home.jpg", "honda")
+    let arrayHonda = [[motorHonda1, motorHonda2, motorHonda3],[motorHonda4, motorHonda5]]
+
+    let motorSu1 = new Product("suzuki1", 50,"image/moto_su1.jpg", "suzuki")
+    let motorSu2 = new Product("suzuki2", 60,"image/moto_su1.jpg", "suzuki")
+    let motorSu3 = new Product("suzuki3", 70,"image/moto_su1.jpg", "suzuki")
+    let motorSu4 = new Product("suzuki4", 80,"image/moto_su1.jpg", "suzuki")
+    let motorSu5 = new Product("suzuki5", 90,"image/moto_su1.jpg", "suzuki")
+    let arraySuzuki = [[motorSu1, motorSu2, motorSu3],[motorSu4, motorSu5]]
+
+    let motorPiagio1 = new Product("piagio1", 50, "image/moto_piagio1.jpg", "piagio")
+    let motorPiagio2 = new Product("piagio2", 60, "image/moto_piagio1.jpg", "piagio")
+    let motorPiagio3 = new Product("piagio3", 70, "image/moto_piagio1.jpg", "piagio")
+    let motorPiagio4 = new Product("piagio4", 80, "image/moto_piagio1.jpg", "piagio")
+    let motorPiagio5 = new Product("piagio5", 90, "image/moto_piagio1.jpg", "piagio")
+    let arrayPiagio = [[motorPiagio1, motorPiagio2, motorPiagio3],[motorPiagio4, motorPiagio5]]
+
+    function showElement(array) {
+        let content = "<table>";
+        for (let i = 0; i < array.length; i++) {
+            content += "<tr>";
+            for (let j = 0; j < array[i].length; j++) {
+                content += "<td>"
+                content += "<img  alt='' src=" + array[i][j].image + ">"
+                content += "<h2>" + array[i][j].name + "</h2>"
+                content += "<p>Giá: " + array[i][j].price + " Triệu VND</p>"
+                content += "</td>"
+            }
+            content += "<tr>"
+        }
+        content += "</table>"
+        document.getElementById("content").innerHTML = content
+    }
+
+    function showCar() {
+        let selectCar = document.getElementById("menu_car").value;
+        switch (selectCar) {
+            case "toyota":
+                showElement(arrayCarToy)
+                break;
+            case "hyundai":
+                showElement(arrayCarHyun)
+                break;
+            case "kia":
+                showElement(arrayKia)
+        }
+    }
+    function showMotor() {
+        let selectMotor = document.getElementById("menu_motor").value;
+        switch (selectMotor) {
+            case "honda":
+                showElement(arrayHonda)
+                break;
+            case "suzuki":
+                showElement(arraySuzuki)
+                break;
+            case "piagio":
+                showElement(arrayPiagio)
+                break;
+        }
+    }
+</script>
+
+</body>
+</html>
